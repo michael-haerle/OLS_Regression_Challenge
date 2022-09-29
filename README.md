@@ -1,4 +1,4 @@
-# <a name="top"></a>Regression Project
+# <a name="top"></a>OLS Regression Challenge
 ![]()
 
 by: Michael Haerle
@@ -24,7 +24,7 @@ ___
 
 
 ## <a name="project_description"></a>Project Description:
-Using the data science pipeline to practice with regression. In this repository you will find everything you need to replicate this project. This project uses the Zillow dataset to find key drivers of property value. 
+Using the data science pipeline to practice with regression. In this repository you will find everything you need to replicate this project. This project is a OLS regression challenge that uses key features of cancer mortality rate and uses them to predict it with the least amount of error.
 
 [[Back to top](#top)]
 
@@ -33,45 +33,47 @@ Using the data science pipeline to practice with regression. In this repository 
 [[Back to top](#top)]
 
 ### Project Outline:
-- Create README.md with data dictionary, project and business goals, come up with questions to lead the exploration and the steps to reproduce.
+- Create README.md with data dictionary, project goals, come up with questions to lead the exploration and the steps to reproduce.
 - Acquire data from the Codeup Database and create a function to automate this process. Save the function in an wrangle.py file to import into the Final Report Notebook.
 - Clean and prepare data for exploration. Create a function to automate the process, store the function in the wrangle.py module, and prepare data in Final Report Notebook by importing and using the funtion.
-- Produce at least 4 clean and easy to understand visuals.
+- Produce at least 6 clean and easy to understand visuals.
 - Clearly define hypotheses, set an alpha, run the statistical tests needed, reject or fail to reject the Null Hypothesis, and document findings and takeaways.
 - Scale the data for modeling.
 - Establish a baseline accuracy.
-- Train three different classification models.
+- Train three different regression models.
 - Evaluate models on train and validate datasets.
 - Choose the model with that performs the best and evaluate that single model on the test dataset.
 - Document conclusions, takeaways, and next steps in the Final Report Notebook.
 
 
 ### Project goals: 
-- My goal is to find and use key drivers of property value for single family properties sold in 2017 to predict property value with the least amount of error.
+- My goal is to find key features of cancer mortality rate and use them to predict it with the least amount of error.
 
 
 ### Target variable:
-- The target variable for this project is tax value.
+- The target variable for this project is deathrate.
 
 ### Initial questions:
 - Where are the correlations in the data?
-- Is there a relationship between Decade Built and Tax Value?
-- Is there a relationship between Tax Value and the Year Built in LA?
-- What does the data look like on a map?
+- Is there a relationship between Deathrate and Incidence Rate?
+- Is Deathrate and Binned Income related?
+- Is there a relationship between Deathrate and Poverty Percent?
+- Is there a relationship between Deathrate and Median Age?
+- Does a specific age bin have affect the deathrate?
+- How many people that died from cancer were diagnosed?
 
 ### Need to haves (Deliverables):
 - A final report notebook
-- A 5min presentation
+- A README
 
 
 ### Nice to haves (With more time):
- - If I had more time with the data I would focus on more feature engineering more columns.
- - I would specifically focus more on the square feet of different areas of the property.
+- If I had more time with the data I would implement clustering to see if I can impove the models performance.
+- I would also pull more of the raw data to see if I could feature engineer more columns.
 
 
 ### Steps to Reproduce:
-- You will need to make an env.py file with a vaild username, hostname and password assigned to the variables user, host, and password
-- Then download the wrangle.py, model.py, and final_report.ipynb
+- Download the csv, wrangle.py, explore.py,  model.py, and final_report.ipynb
 - Make sure these are all in the same directory and run the final_report.ipynb.
 
 ***
@@ -79,11 +81,10 @@ Using the data science pipeline to practice with regression. In this repository 
 ## <a name="findings"></a>Key Findings:
 [[Back to top](#top)]
 
-- Tax Value has a positive correlation with house_size_large, decade, full_bathroom, year_built, square_feet, bathrooms, and bedrooms.
-- Any decade after the 1960's is above the average Tax Value.
-- There were only 12 properties sold on Santa Catalina Island.
-- Properties near the beach tend to have higher Tax Values.
-- In the 1950's there was lots of properties sold, espically those with lower tax values.
+- Only 1/3 of the people diagnosed actually died.
+- The Mid-Aged bin has a slightly higher average deathrate then young or old does.
+- The red binned [22640, 34218.1] income has more counties with extreme levels of deathrate.
+- The blue binned (61494.5, 125635] income has a majority of their counties below the average deathrate. 
 
 
 ***
