@@ -24,7 +24,7 @@ ___
 
 
 ## <a name="project_description"></a>Project Description:
-Using the data science pipeline to practice with regression. In this repository you will find everything you need to replicate this project. This project is a OLS regression challenge that uses key features of cancer mortality rate and uses them to predict it with the least amount of error.
+Using the data science pipeline to practice with regression. In this repository you will find everything you need to replicate this project. This project is a OLS regression challenge that finds key features of lung cancer mortality rate and uses them to predict it with the least amount of error.
 
 [[Back to top](#top)]
 
@@ -47,7 +47,7 @@ Using the data science pipeline to practice with regression. In this repository 
 
 
 ### Project goals: 
-- My goal is to find key features of cancer mortality rate and use them to predict it with the least amount of error.
+- My goal is to find key features of lung cancer mortality rate and use them to predict it with the least amount of error.
 
 
 ### Target variable:
