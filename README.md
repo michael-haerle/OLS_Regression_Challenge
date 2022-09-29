@@ -143,17 +143,13 @@ Using the data science pipeline to practice with regression. In this repository 
 
 
 ### Prepare steps: 
-- Droped duplicate columns
-- Created dummy variables
-- Concatenated the dummy dataframe
-- Renamed columns
 - Dropped columns not needed
 - Removed ouliers
-- Imputed nulls with 0 for fireplace and full_bathroom
-- Used square feet to feature engineer a new column where it returned small, medium, or large house size
-- Used .apply to apply a custom function to create a decade column for what decade the house was built in
-- Converted latitude and longitude to the proper values
+- Imputed nulls with mean for PctEmployed16_Over
+- Replaced outliers for MedianAge, MedianAgeMale, MedianAgeFemale that were over 100 years
+- Used MedianAge to make a new column with 3 age bins
 - Split into the train, validate, and test sets
+- Scaled the data to be used later in modeling
 
 *********************
 
@@ -161,46 +157,44 @@ Using the data science pipeline to practice with regression. In this repository 
 [[Back to top](#top)]
 - Python files used for exploration:
     - wrangle.py
+    - explore.py
     - model.py
 
 
 ### Takeaways from exploration:
-- Tax Value has a positive correlation with house_size_large, decade, full_bathroom, year_built, square_feet, bathrooms, and bedrooms.
-- Any decade after the 1960's is above the average Tax Value.
-- There were only 12 properties sold on Santa Catalina Island.
-- Fireplaces does not apear to be useful for the modeling phase.
-- Decade and the house_size columns will be used during the modeling phase.
-
+- Only 1/3 of the people diagnosed actually died.
+- The Mid-Aged bin has a slightly higher average deathrate then young or old does.
+- The red binned [22640, 34218.1] income has more counties with extreme levels of deathrate.
+- The blue binned (61494.5, 125635] income has a majority of their counties below the average deathrate.
 ***
 
 ## <a name="stats"></a>Statistical Analysis
 [[Back to top](#top)]
 
-### Stats Test 1: Chi Square
+### Stats Test 1: PearsonR
 
 
 #### Hypothesis:
-- The null hypothesis (H<sub>0</sub>) is: The Decade Built and Tax Value are independent.
-- The alternate hypothesis (H<sub>1</sub>) is: There is a relationship between tax value and the Decade Built.
+- The null hypothesis (H<sub>0</sub>) is: There is no relationship between deathrate and incidence rate.
+- The alternate hypothesis (H<sub>1</sub>) is: There is a relationship between deathrate and incidence rate.
 
 #### Confidence level and alpha value:
 - I established a 95% confidence level
 - alpha = 1 - confidence, therefore alpha is 0.05
 
 #### Results:
-- We reject the null hypothesis that The Decade Built and Tax Value are independent
-- There is a relationship between tax value and the Decade Built
-- 3.9309219442730487e-16
-- Chi2 214095.42
-- Degrees of Freedom 208846
+- Correlation: 0.44
+- P-value: 6.73e-83
+- We reject the null hypothesis that There is no relationship between the Deathrate and Incidence Rate.
+- There is a relationship between the Deathrate and Incidence Rate.
 
 
-### Stats Test 2: Chi Square
+### Stats Test 2: PearsonR
 
 
 #### Hypothesis:
-- The null hypothesis (H<sub>0</sub>) is: The Year Built in LA and Tax value are independent.
-- The alternate hypothesis (H<sub>1</sub>) is: There is a relationship between Tax Value and the Year Built in LA.
+- The null hypothesis (H<sub>0</sub>) is: There is no relationship between deathrate and poverty percent.
+- The alternate hypothesis (H<sub>1</sub>) is: There is a relationship between deathrate and poverty percent.
 
 #### Confidence level and alpha value:
 - I established a 95% confidence level
@@ -208,11 +202,28 @@ Using the data science pipeline to practice with regression. In this repository 
 
 
 #### Results:
-- We fail to reject the null hypothesis that The Year Built in LA and Tax value are independent
-- There appears to be no relationship between Tax Value and the Year Built in LA
-- P-Value 0.4721751128088897
-- Chi2 1454990.41
-- Degrees of Freedom 1454872
+- Correlation: 0.42
+- P-value: 1.14e-72
+- We reject the null hypothesis that There is no relationship between the Deathrate and Poverty Percent.
+- There is a relationship between the Deathrate and Poverty Percent.
+
+
+### Stats Test 3: PearsonR
+
+
+#### Hypothesis:
+- The null hypothesis (H<sub>0</sub>) is: There is no relationship between deathrate and median age.
+- The alternate hypothesis (H<sub>1</sub>) is: There is a relationship between deathrate and median age.
+
+#### Confidence level and alpha value:
+- I established a 95% confidence level
+- alpha = 1 - confidence, therefore alpha is 0.05
+
+
+#### Results:
+- Correlation: -0.0066
+- P-value: 0.78
+- We fail to reject the null hypothesis that There is no relationship between the Deathrate and Median Age.
 
 
 ***
@@ -222,12 +233,13 @@ Using the data science pipeline to practice with regression. In this repository 
 
 ### Baseline (Using Mean)
     
-- Baseline RMSE: 247730.36
+- Baseline RMSE: 27.83
     
 
 - Selected features to input into models:
-    - features =  ['bedrooms', 'bathrooms', 'square_feet', 'lot_square_feet', 'full_bathroom', 'year_built', 'fips', 'region_zip', 'house_size_large', 'house_size_small', 'decade']
-
+    - features =  ['incidenceRate', 'povertyPercent', 'PctHS25_Over', 'PctBachDeg25_Over', 
+    'PctPublicCoverageAlone', 'PctHS18_24', 'PctUnemployed16_Over', 'PctPublicCoverage']
+    
 ***
 
 ## Models:
@@ -238,9 +250,9 @@ Using the data science pipeline to practice with regression. In this repository 
 
 Model 1 results:
 - RMSE for Lasso + Lars
-- Training/In-Sample:  212401.75 
-- Validation/Out-of-Sample:  216116.17
-- R2 Value: 0.26
+- Training/In-Sample:  27.83 
+- Validation/Out-of-Sample:  27.42
+- R2 Value: 0.0
 
 
 ### Model 2 : OLS using LinearRegression
@@ -248,18 +260,18 @@ Model 1 results:
 
 Model 2 results:
 - RMSE for OLS using LinearRegression
-- Training/In-Sample:  212395.09 
-- Validation/Out-of-Sample:  216108.91
-- R2 Value: 0.26
+- Training/In-Sample:  20.25 
+- Validation/Out-of-Sample:  18.96
+- R2 Value: 0.47
 
 
 ### Model 3 : Polynomial Model
 
 Model 3 results:
 - RMSE for Polynomial Model, degrees=2
-- Training/In-Sample:  204839.27 
-- Validation/Out-of-Sample:  208981.93
-- R2 Value: 0.31
+- Training/In-Sample:  19.11 
+- Validation/Out-of-Sample:  19.14
+- R2 Value: 0.53
 
 
 ## Selecting the Best Model:
@@ -268,10 +280,10 @@ Model 3 results:
 
 | Model | Validation | R2 |
 | ---- | ---- | ---- |
-| Baseline | 247730.36 | 0.0 |
-| Lasso + Lars | 216116.17 | 0.26 |
-| OLS using LinearRegression | 216108.91 |  0.26 |
-| Polynomial Model | 208981.93 | 0.31 |
+| Baseline | 27.83 | 0.0 |
+| Lasso + Lars | 27.42 | 0.0 |
+| OLS using LinearRegression | 18.96 |  0.47 |
+| Polynomial Model | 19.14 | 0.53 |
 
 
 - {Polynomial Model} model performed the best
@@ -279,16 +291,18 @@ Model 3 results:
 
 ## Testing the Model
 
-- Model Testing Results: RMSE 204854.96, R2 0.31
+- Model Testing Results: RMSE 20.49, R2 0.46
 
 ***
 
 ## <a name="conclusion"></a>Conclusion:
 
-- Tax Value has a positive correlation with house_size_large, decade, full_bathroom, year_built, square_feet, bathrooms, and bedrooms.
-- Any decade after the 1960's is above the average Tax Value.
-- Our RMSE value for our test dataset beat our baseline by 41,831.16.
+- Only 1/3 of the people diagnosed actually died.
+- The Mid-Aged bin has a slightly higher average deathrate then young or old does.
+- The red binned [22640, 34218.1] income has more counties with extreme levels of deathrate.
+- The blue binned (61494.5, 125635] income has a majority of their counties below the average deathrate.
+- Our RMSE value for our test dataset beat our baseline by 26%.
 
-#### A way to further improve the our predictions would be ensuring that the data gathered didn't have as many nulls, and a catagory to select if its a certain distance away from a beach. There was an extreme amount of nulls in the data, this is definitely the best way to improve predictions.
+#### In order to potentially reduce the deathrate in certain counties, we need to find a way to incentivise people in those lower income ranges to get checked more often. This can possibly be done through a public program of some sort. We can also spread more awareness to get checked in the first place.
 
 [[Back to top](#top)]
