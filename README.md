@@ -93,6 +93,9 @@ Using the data science pipeline to practice with regression. In this repository 
 [[Back to top](#top)]
 
 ### Data Used
+
+- (a): years 2010-2016
+- (b): 2013 Census Estimates
 ---
 | Attribute | Definition | Data Type |
 | ----- | ----- | ----- |
