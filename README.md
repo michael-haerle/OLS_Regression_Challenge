@@ -97,17 +97,17 @@ Using the data science pipeline to practice with regression. In this repository 
 | ----- | ----- | ----- |
 | TARGET_deathRate| Dependent variable. Mean per capita (100,000) cancer mortalities(a) | float64 |
 | avgAnnCount| Mean number of reported cases of cancer diagnosed annually(a) | float64 |
-| avgDeathsPerYear| Mean number of reported mortalities due to cancer(a) | float64 |
+| avgDeathsPerYear| Mean number of reported mortalities due to cancer(a) | int64 |
 | incidenceRate| Mean per capita (100,000) cancer diagoses(a) | float64 |
-| medianIncome| Median income per county (b) | float64 |
-| popEst2015| Population of county (b) | float64 |
+| medianIncome| Median income per county (b) | int64 |
+| popEst2015| Population of county (b) | int64 |
 | povertyPercent| Percent of populace in poverty (b) | float64 |
 | studyPerCap| Per capita number of cancer-related clinical trials per county (a) | float64 |
-| binnedInc| Median income per capita binned by decile (b) | float64 |
+| binnedInc| Median income per capita binned by decile (b) | object |
 | MedianAge| Median age of county residents (b) | float64 |
 | MedianAgeMale| Median age of male county residents (b) | float64 |
 | MedianAgeFemale| Median age of female county residents (b) | float64 |
-| Geography| County name (b) | float64 |
+| Geography| County name (b) | object |
 | AvgHouseholdSize| Mean household size of county (b) | float64 |
 | PercentMarried| Percent of county residents who are married (b) | float64 |
 | PctNoHS18_24| Percent of county residents ages 18-24 highest education attained: less than high school (b) | float64 |
@@ -129,6 +129,7 @@ Using the data science pipeline to practice with regression. In this repository 
 | PctOtherRace| Percent of county residents who identify in a category which is not White, Black, or Asian (b) | float64 |
 | PctMarriedHouseholds| Percent of married households (b) | float64 |
 | BirthRate| Number of live births relative to number of women in county (b) | float64 |
+| AgeBin| MedianAge binned into 3 parts, young, mid-aged, old | category |
 ***
 
 ## <a name="wrangle"></a>Data Acquisition and Preparation
