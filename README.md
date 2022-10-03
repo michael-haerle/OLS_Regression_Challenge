@@ -34,7 +34,7 @@ Using the data science pipeline to practice with regression. In this repository 
 
 ### Project Outline:
 - Create README.md with data dictionary, project goals, come up with questions to lead the exploration and the steps to reproduce.
-- Acquire data from the Codeup Database and create a function to automate this process. Save the function in an wrangle.py file to import into the Final Report Notebook.
+- Acquire data from data.world and automate it in a function, and store the function in the wrangle.py module.
 - Clean and prepare data for exploration. Create a function to automate the process, store the function in the wrangle.py module, and prepare data in Final Report Notebook by importing and using the funtion.
 - Produce at least 6 clean and easy to understand visuals.
 - Clearly define hypotheses, set an alpha, run the statistical tests needed, reject or fail to reject the Null Hypothesis, and document findings and takeaways.
@@ -73,7 +73,7 @@ Using the data science pipeline to practice with regression. In this repository 
 
 
 ### Steps to Reproduce:
-- Download the csv, wrangle.py, explore.py,  model.py, and final_report.ipynb
+- Download the csv from https://data.world/nrippner/ols-regression-challenge , download the wrangle.py, explore.py,  model.py, and final_report.ipynb
 - Make sure these are all in the same directory and run the final_report.ipynb.
 
 ***
